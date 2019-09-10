@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  market:
+    image: golang:latest
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./log:/app/log
+      - ./src:/app/src
+    ports:
+      - "9990:8080"
+    environment:
+      - TZ=Asia/Shanghai
+
+      # - GO111MODULE=on
+      # - GOPROXY=https://goproxy.io
+    container_name: market
+    command: bash -c "cd /app/src && go run main.go"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:3.6.3
+    container_name: market-mongo
+    ports:
+      - '9961:27017'
+    volumes:
+      - ./data/mongo:/data/db
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Asia/Shanghai
+      - MONGO_INITDB_ROOT_USERNAME=username
+      - MONGO_INITDB_ROOT_PASSWORD=passwd
+      - MONGO_INITDB_DATABASE=marketdb
+
