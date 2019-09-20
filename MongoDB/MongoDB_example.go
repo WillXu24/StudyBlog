@@ -47,7 +47,7 @@ func ExampleMongo() {
 	if res, err := InsertOneUser(NewUser); err != nil {
 		return
 	} else {
-		fmt.Println("new post created with id: %s", res.InsertedID.(primitive.ObjectID).Hex())
+		fmt.Printf("new post created with id: %s", res.InsertedID.(primitive.ObjectID).Hex())
 	}
 
 	// insert many users
