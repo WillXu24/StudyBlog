@@ -13,7 +13,7 @@
 
 > 成员管理系统
 
-- 要求：分别实现普通用户与管理员的权限操作，[更多详情...](./UserManagementSystem/README.md)
+- 要求：分别实现普通用户与管理员的权限操作，[更多详情...](https://github.com/WillXu24/UserManagementSystem)
 
 - 小结：
   - 基本的CRUD操作
@@ -24,7 +24,7 @@
 
 > 商城后台系统
 
-- 要求：实现用户登录、资料以及对商品的管理等操作，[更多详情...](https://github.com/WillXu24/GolangPracticeProject/blob/master/OnlineMallSystem/README.md)
+- 要求：实现用户登录、资料以及对商品的管理等操作，[更多详情...](https://github.com/WillXu24/OnlineMallSystem)
 - 小结：
   - 业务的开发的基本流程
   - 数据库存储设计
@@ -35,7 +35,7 @@
 
 > 简单的整合框架
 
-- 要求：实现一个项目初始化框架，整合多个常用库且良好的可定制性与拓展性，[更多详情...](https://github.com/WillXu24/GinEasy/tree/master)
+- 要求：实现一个项目初始化框架，整合多个常用库且良好的可定制性与拓展性，[更多详情...](https://github.com/WillXu24/GinEasy)
 - 小结：
   - 对于项目结构的深入思考
   - 对优秀项目的源码解读与模仿
