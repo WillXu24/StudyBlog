@@ -5,5 +5,9 @@
 目录及简介
 
 ```lua
-└─mongo-go-driver		----------mongo-go示例
+│
+├─docker-compose 			----- 利用docker-compose搭建测试数据库实例
+│
+└─mongo-go-driver			----- mongoDB的golang官方驱动项目实例
 ```
+
