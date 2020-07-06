@@ -11,14 +11,13 @@ import (
 	"time"
 )
 
-/*****************************************初始化数据库****************************************************/
-// 数据库参数
+/******************************************************init************************************************************/
 const (
 	DatabaseURI  = "mongodb://localhost:27017"
 	DatabaseName = "example"
 )
 
-// 声明全局用户集合
+// UserColl 用户集合
 var UserColl *mongo.Collection
 
 func init() {
@@ -40,8 +39,9 @@ func init() {
 	UserColl = db.Collection("user")
 }
 
-/*****************************************基本CRUD操作****************************************************/
-// 用户结构体
+/*******************************************************model**********************************************************/
+
+// User 用户结构体
 type User struct {
 	ID        primitive.ObjectID `bson:"_id"`
 	Username  string             `bson:"username" `
@@ -50,7 +50,9 @@ type User struct {
 	UpdatedAt time.Time          `bson:"updated_at"`
 }
 
-// 新增一个记录
+/*******************************************************basic**********************************************************/
+
+// UserInsertOne 新增一个记录
 func UserInsertOne(msg User) (*mongo.InsertOneResult, error) {
 	res, err := UserColl.InsertOne(context.Background(), bson.M{
 		"username":   msg.Username,
@@ -60,7 +62,7 @@ func UserInsertOne(msg User) (*mongo.InsertOneResult, error) {
 	return res, err
 }
 
-// 新增多个记录（不太好用
+// UserInsertMany 新增多个记录（不太好用
 func UserInsertMany(msg []User) (*mongo.InsertManyResult, error) {
 	res, err := UserColl.InsertMany(context.Background(), []interface{}{
 		bson.M{
@@ -76,14 +78,14 @@ func UserInsertMany(msg []User) (*mongo.InsertManyResult, error) {
 	return res, err
 }
 
-// 查找一个记录
+// UserFindOne 查找一个记录
 func UserFindOne(filter bson.M) (User, error) {
 	var msg User
 	err := UserColl.FindOne(context.Background(), filter).Decode(&msg)
 	return msg, err
 }
 
-// 查找多个记录
+// UserFindMany 查找多个记录
 func UserFindMany(filter bson.M, options *options.FindOptions) ([]User, error) {
 	ctx := context.Background()
 	cursor, err := UserColl.Find(ctx, filter, options)
@@ -102,25 +104,25 @@ func UserFindMany(filter bson.M, options *options.FindOptions) ([]User, error) {
 	return res, nil
 }
 
-// 更新一个记录
+// UserUpdateOne 更新一个记录
 func UserUpdateOne(filter bson.M, update bson.M, options *options.UpdateOptions) (*mongo.UpdateResult, error) {
 	res, err := UserColl.UpdateOne(context.Background(), filter, update, options)
 	return res, err
 }
 
-// 更新多个记录
+// UserUpdateMany 更新多个记录
 func UserUpdateMany(filter bson.M, update bson.M, options *options.UpdateOptions) (*mongo.UpdateResult, error) {
 	res, err := UserColl.UpdateMany(context.Background(), filter, update, options)
 	return res, err
 }
 
-// 删除一个记录
+// UserDeleteOne 删除一个记录
 func UserDeleteOne(filter bson.M) (*mongo.DeleteResult, error) {
 	res, err := UserColl.DeleteOne(context.Background(), filter)
 	return res, err
 }
 
-// 删除多个记录
+// UserDeleteMany 删除多个记录
 func UserDeleteMany(filter bson.M) (*mongo.DeleteResult, error) {
 	res, err := UserColl.DeleteMany(context.Background(), filter)
 	return res, err
