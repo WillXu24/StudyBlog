@@ -1,6 +1,10 @@
-## docker-compose搭建基础设施
+## docker-compose
 
-> 包括mysql、mongodb、redis，主要用于测试和玩耍
+> docker-compose的简单实例与go测试实例
+
+### docker-compose.yml
+
+**注意**：自己设定**各个**容器的密码：）
 
 ```yaml
 version: "3"
@@ -37,21 +41,3 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./redis:/data
 ```
-
-### 注意点（持续更新
-
-#### 设定密码
-
-虽然是测试用，最好还是设定一下密码。
-
-#### redis配置文件
-
-`redis.conf`
-
-```
-requirepass 123456
-#daemonize yes
-bind 0.0.0.0
-appendonly yes
-```
-

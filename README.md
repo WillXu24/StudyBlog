@@ -1,13 +1,15 @@
-## StudyBlog
+## study-blog
 
 > 个人学习总结与参考资料
 
 目录及简介
 
 ```lua
-│
-├─docker-compose 			----- 利用docker-compose搭建测试数据库实例
-│
-└─mongo-go-driver			----- mongoDB的golang官方驱动项目实例
+|
+├─docker-compose			----- docker-compose的简单实例与go测试实例
+|
+├─go-sort					----- 常见排序算法的golang实现
+│  
+└─mongo-go-driver 			----- mongo-go-driver的go项目简单实例
 ```
 
