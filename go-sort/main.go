@@ -7,9 +7,9 @@ func main() {
 	selectSort([]int{9, 1, 5, 8, 3, 7, 4, 6, 2})
 	insertSort([]int{9, 1, 5, 8, 3, 7, 4, 6, 2})
 	shellSort([]int{9, 1, 5, 8, 3, 7, 4, 6, 2})
-	//heapSort([]int{39, 100, 1, 99, 0, 34, 2, 35})
 	heapSort([]int{9, 1, 5, 8, 3, 7, 4, 6, 2})
 	mergeSort0([]int{9, 1, 5, 8, 3, 7, 4, 6, 2})
+	quickSort([]int{9, 1, 5, 8, 3, 7, 4, 6, 2})
 }
 
 /**********************************************************************************************************************/
@@ -172,3 +172,30 @@ func merge(a, b []int)  []int  {
 }
 
 /**********************************************************************************************************************/
+func quickSort(a []int) {
+	qSort(a,0,len(a)-1)
+	fmt.Println("Quick Sort:", a)
+}
+func qSort(a []int,left,right int)  {
+	if left>=right{
+		return
+	}
+	p:=partition(a,left,right)
+	qSort(a,left,p-1)
+	qSort(a,p+1,right)
+}
+
+func partition(a []int,left,right int) int {
+	p:=a[left]
+	for left!=right{
+		for left<right&&p<a[right]{
+			right--
+		}
+		a[left],a[right] = a[right],a[left]
+		for left<right&&a[left]<p{
+			left++
+		}
+		a[left],a[right] = a[right],a[left]
+	}
+	return left
+}
