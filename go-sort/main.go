@@ -9,7 +9,7 @@ func main() {
 	shellSort([]int{9, 1, 5, 8, 3, 7, 4, 6, 2})
 	//heapSort([]int{39, 100, 1, 99, 0, 34, 2, 35})
 	heapSort([]int{9, 1, 5, 8, 3, 7, 4, 6, 2})
-
+	mergeSort0([]int{9, 1, 5, 8, 3, 7, 4, 6, 2})
 }
 
 /**********************************************************************************************************************/
@@ -136,6 +136,39 @@ func heapAdjust(a []int,root int) int {
 		root=i
 	}
 	return count
+}
+
+/**********************************************************************************************************************/
+func mergeSort0(a []int)  {
+	res:=mSort(a)
+	fmt.Println("Merge Sort:", res)
+}
+
+func mSort(a []int)[]int {
+	if len(a)<2{
+		return a
+	}
+	m:=len(a)/2
+	l:=mSort(a[:m])
+	r:=mSort(a[m:])
+	return merge(l,r)
+}
+
+func merge(a, b []int)  []int  {
+	var res []int
+	i,j:=0,0
+	for i<len(a)&&j<len(b){
+		if a[i] <= b[j]{
+			res=append(res,a[i])
+			i++
+		}else {
+			res=append(res,b[j])
+			j++
+		}
+	}
+	res=append(res,a[i:]...)
+	res=append(res,b[j:]...)
+	return res
 }
 
 /**********************************************************************************************************************/
