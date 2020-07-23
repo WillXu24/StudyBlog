@@ -1,6 +1,8 @@
 /docker-compose/.idea/
 /docker-compose/go.sum
 
+/go-search/.idea/
+
 /go-sort/.idea/
 
 /mongo-go-driver/.idea/
