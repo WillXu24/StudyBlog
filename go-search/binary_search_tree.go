@@ -54,10 +54,18 @@ func (bst *BST) Remove(value int) bool {
 		node = nil
 		return true
 	}
-	// todo: remove
-	if node.left == nil {
 
+	if node.left == nil {
+		node = node.right
+		return true
 	}
+
+	if node.right == nil {
+		node = node.left
+		return true
+	}
+
+	// todo: remove
 }
 
 func (bst *BST) Search(value int) *Node {
