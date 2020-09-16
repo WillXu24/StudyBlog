@@ -12,8 +12,6 @@
 |
 ├─go-sort				----- 常见排序算法的golang实现
 |
-├─jianzhi-offer				----- 剑指offer题解
-|
 ├─leetcode				----- leetcode题解
 |
 └─mongo-go-driver			----- mongo-go-driver的go项目简单实例
