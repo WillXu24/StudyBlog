@@ -1,16 +1,14 @@
 package main
 
 import (
-	"fmt"	
+	"fmt"
 	"strings"
 )
 
-
 func main() {
-	res:=lengthOfLongestSubstring("abcabcbb")
+	res := lengthOfLongestSubstring("abcabcbb")
 	fmt.Println(res)
 }
-
 
 func lengthOfLongestSubstring(s string) int {
 	start, end := 0, 0

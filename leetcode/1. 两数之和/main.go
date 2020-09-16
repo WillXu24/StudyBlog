@@ -3,10 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	nums:=[]int{2,7,11,15}
-	target:=9
-	fmt.Println(twoSum1(nums,target))
-	fmt.Println(twoSum2(nums,target))
+	nums := []int{2, 7, 11, 15}
+	target := 9
+	fmt.Println(twoSum1(nums, target))
+	fmt.Println(twoSum2(nums, target))
 }
 
 // 暴力

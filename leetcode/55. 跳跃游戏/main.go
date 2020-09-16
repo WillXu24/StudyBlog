@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	nums:=[]int{2,3,1,1,4}
-	nums=[]int{1}
-	res:=canJump(nums)
+	nums := []int{2, 3, 1, 1, 4}
+	nums = []int{1}
+	res := canJump(nums)
 	fmt.Println(res)
 }
 

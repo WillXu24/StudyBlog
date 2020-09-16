@@ -4,45 +4,43 @@ import "fmt"
 
 // TreeNode 二叉树
 type TreeNode struct {
-	    Val int
-        Left *TreeNode
-	    Right *TreeNode
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func main()  {
-	tree:=TreeNode{
+func main() {
+	tree := TreeNode{
 		Val: 4,
 		Left: &TreeNode{
-			Val:2,
+			Val: 2,
 			Left: &TreeNode{
-				Val:1,
-				
+				Val: 1,
 			},
 			Right: &TreeNode{
-				Val:3,
+				Val: 3,
 			},
 		},
 		Right: &TreeNode{
-			Val:7,
+			Val: 7,
 			Left: &TreeNode{
-				Val:6,
-				
+				Val: 6,
 			},
 			Right: &TreeNode{
-				Val:9,
+				Val: 9,
 			},
 		},
 	}
 
-	res:=invertTree(&tree)
+	res := invertTree(&tree)
 
-	fmt.Println("     ",res.Val)
-	fmt.Println(" ",res.Left.Val,"      ",res.Right.Val)
-	fmt.Println(res.Left.Left.Val," ",res.Left.Right.Val,"  ",res.Right.Left.Val," ",res.Right.Right.Val)
+	fmt.Println("     ", res.Val)
+	fmt.Println(" ", res.Left.Val, "      ", res.Right.Val)
+	fmt.Println(res.Left.Left.Val, " ", res.Left.Right.Val, "  ", res.Right.Left.Val, " ", res.Right.Right.Val)
 }
 
 func invertTree(root *TreeNode) *TreeNode {
-    // 递归结束条件
+	// 递归结束条件
 	if root == nil {
 		return nil
 	}
