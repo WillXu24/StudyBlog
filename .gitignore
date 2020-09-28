@@ -5,5 +5,7 @@
 
 /go-sort/.idea/
 
+/leetcode/.idea/
+
 /mongo-go-driver/.idea/
 /mongo-go-driver/go.sum
