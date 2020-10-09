@@ -14,5 +14,5 @@ func numWays(n int) int {
 	for i := 0; i < n-1; i++ {
 		n0, n1 = n1, (n0+n1)%1000000007
 	}
-	return n1 % 1000000007
+	return n1 //% 1000000007
 }

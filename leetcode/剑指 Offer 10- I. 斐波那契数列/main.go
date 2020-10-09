@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(fib(5))
+	fmt.Println(fib(100))
 }
 
 // 递归超时
@@ -26,5 +26,5 @@ func fib(n int) int {
 	for i := 1; i < n; i++ {
 		v1, v2 = v2, (v1+v2)%1000000007
 	}
-	return v2 % 1000000007
+	return v2 //% 1000000007
 }
