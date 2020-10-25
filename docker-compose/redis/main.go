@@ -2,14 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/garyburd/redigo/redis"
 	"log"
+
+	"github.com/garyburd/redigo/redis"
 )
 
-var URI = ""
+var uri = "localhost:6379"
+var psw = "123456"
 
 func main() {
-	c, err := redis.Dial("tcp", URI)
+	c, err := redis.Dial("tcp", uri, redis.DialPassword(psw))
 	if err != nil {
 		log.Fatal(err)
 		return
