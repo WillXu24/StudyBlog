@@ -2,9 +2,13 @@
 
 > docker-compose的简单实例与go测试实例
 
-### docker-compose.yml
+### 环境
 
-**注意**：自己设定**各个**容器的密码：）
+- Linux
+- Docker
+- Docker-compose
+
+### 配置文件
 
 ```yaml
 version: "3"
@@ -30,14 +34,17 @@ services:
     volumes:
       - "./mysql:/var/lib/mysql"
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456           # 密码
 
   redis:
     image: redis
     container_name: redis
+    command: redis-server --requirepass 123456 # 密码
     ports:
       - "6379:6379"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./redis:/data
+    environment:
+      - TZ=Asia/Shanghai
 ```
