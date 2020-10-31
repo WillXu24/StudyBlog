@@ -12,7 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-var uri = "mongodb://root:123456@localhost:27017"
+var uri = "mongodb://root:1234@localhost:27017"
 
 // DB 客户端
 var DB *mongo.Client

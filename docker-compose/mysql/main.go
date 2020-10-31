@@ -14,8 +14,9 @@ type Product struct {
 	Price uint
 }
 
+// 需要先手动创建数据库！！！
 func main() {
-	dsn := "root:123456@tcp(127.0.0.1:3306)/example?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:1234@tcp(127.0.0.1:3306)/example?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)

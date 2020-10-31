@@ -8,7 +8,7 @@ import (
 )
 
 var uri = "localhost:6379"
-var psw = "123456"
+var psw = "1234"
 
 func main() {
 	c, err := redis.Dial("tcp", uri, redis.DialPassword(psw))
@@ -18,17 +18,17 @@ func main() {
 	}
 	defer c.Close()
 
-	_, err = c.Do("SET", "key", "value")
+	_, err = c.Do("SET", "name", "will")
 	if err != nil {
 		log.Println("[Error]", err)
 		return
 	}
 
-	value, err := redis.String(c.Do("GET", "key"))
+	value, err := redis.String(c.Do("GET", "name"))
 	if err != nil {
 		log.Println("[Error]", err)
 		return
 	}
 
-	fmt.Println("[success] key :", value)
+	fmt.Println("[success] name:", value)
 }
