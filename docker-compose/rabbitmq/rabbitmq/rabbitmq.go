@@ -3,6 +3,7 @@ package rabbitmq
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/streadway/amqp"
 )
@@ -139,6 +140,9 @@ func (r *RabbitMQ) ConsumeSimple() {
 			// 实现我们要实现的逻辑函数
 			//log.Printf("Received a message: %s", d.Body)
 			fmt.Println("Consumer:", string(d.Body))
+			if string(d.Body) == "sleep" {
+				time.Sleep(5 * time.Second)
+			}
 		}
 	}()
 	log.Printf("...Waiting for message")

@@ -5,30 +5,30 @@ services:
     image: mongo
     container_name: mongo
     ports:
-      - "27017:27017"
+      - "27017:27017" # 端口
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./mongodb:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root      # 用户名
-      MONGO_INITDB_ROOT_PASSWORD: 1234    # 密码
+      MONGO_INITDB_ROOT_USERNAME: root  # 用户名
+      MONGO_INITDB_ROOT_PASSWORD: 1234  # 密码
 
   mysql:
     image: mysql
     container_name: mysql
     ports:
-      - "3306:3306"
+      - "3306:3306" # 端口
     volumes:
       - "./mysql:/var/lib/mysql"
     environment:
-      MYSQL_ROOT_PASSWORD: 1234           # 密码
+      MYSQL_ROOT_PASSWORD: 1234 # 密码
 
   redis:
     image: redis
     container_name: redis
-    command: redis-server --requirepass 1234 # 密码
+    command: redis-server --requirepass 1234  # 密码
     ports:
-      - "6379:6379"
+      - "6379:6379" # 端口
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./redis:/data
@@ -36,15 +36,13 @@ services:
       - TZ=Asia/Shanghai
 
   rabbitmq:
-    image: rabbitmq #:3.8.3-management
+    image: rabbitmq 
     container_name: rabbitmq
-    #restart: always
     hostname: myRabbitmq
     ports:
-      # - 15672:15672
-      - 5672:5672
+      - 5672:5672 # 端口
     volumes:
       - ./rabbitmq:/var/lib/rabbitmq
     environment:
-      - RABBITMQ_DEFAULT_USER=root
-      - RABBITMQ_DEFAULT_PASS=1234
+      - RABBITMQ_DEFAULT_USER=root  # 用户名
+      - RABBITMQ_DEFAULT_PASS=1234  # 密码
