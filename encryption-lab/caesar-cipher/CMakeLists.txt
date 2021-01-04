@@ -3,4 +3,4 @@ project(caesar-cipher)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(caesar-cipher main.cpp)
+add_executable(caesar-cipher caesar-cipher.cpp)
