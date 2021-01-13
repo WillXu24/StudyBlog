@@ -20,7 +20,6 @@ int main(int argc, char *argv[]) {
     Roy::String fout = ptr->outPath;
     uint8_t *key = ptr->key;
     delete (ptr);
-    ptr = NULL;
     if (fin.empty()) {
         cout << "输入文件（fin）未指定！" << endl;
         return 2;
@@ -36,7 +35,7 @@ int main(int argc, char *argv[]) {
             return -1;
         }
     }
-    if (0 == key) {
+    if (nullptr == key) {
         key = (uint8_t *) AES_DEFAULT_KEY;
     }
     int code;

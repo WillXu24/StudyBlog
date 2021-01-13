@@ -1,7 +1,7 @@
 #include <array>
 #include <bitset>
 #include <cstring>
-#include "Aes.h"
+#include "AES.h"
 
 namespace Roy {
 #define Nb 4
@@ -79,7 +79,7 @@ namespace Roy {
      *
      * From Wikipedia's article on the Rijndael key schedule @ https://en.wikipedia.org/wiki/Rijndael_key_schedule#Rcon
      *
-     * "Only the first some of these constants are actually used ¨C up to rcon[10] for AES-128 (as 11 round keys are needed),
+     * "Only the first some of these constants are actually used ï¿½C up to rcon[10] for AES-128 (as 11 round keys are needed),
      *  up to rcon[8] for AES-192, up to rcon[7] for AES-256. rcon[0] is not used in AES algorithm."
      */
 
@@ -350,54 +350,54 @@ namespace Roy {
 
 #endif // #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
 
-    // Cipher is the main function that encrypts the PlainText.
-    void Aes::Cipher(state_t *state, const uint8_t *RoundKey) {
-        uint8_t round = 0;
+// Cipher is the main function that encrypts the PlainText.
+void Aes::Cipher(state_t *state, const uint8_t *RoundKey) {
+    uint8_t round = 0;
 
-        // Add the First round key to the state before starting the rounds.
-        Aes::AddRoundKey(0, state, RoundKey);
+    // Add the First round key to the state before starting the rounds.
+    Aes::AddRoundKey(0, state, RoundKey);
 
-        // There will be Nr rounds.
-        // The first Nr-1 rounds are identical.
-        // These Nr-1 rounds are executed in the loop below.
-        for (round = 1; round < Nr; ++round) {
-            Aes::SubBytes(state);
-            Aes::ShiftRows(state);
-            Aes::MixColumns(state);
-            Aes::AddRoundKey(round, state, RoundKey);
-        }
-
-        // The last round is given below.
-        // The MixColumns function is not here in the last round.
+    // There will be Nr rounds.
+    // The first Nr-1 rounds are identical.
+    // These Nr-1 rounds are executed in the loop below.
+    for (round = 1; round < Nr; ++round) {
         Aes::SubBytes(state);
         Aes::ShiftRows(state);
-        Aes::AddRoundKey(Nr, state, RoundKey);
+        Aes::MixColumns(state);
+        Aes::AddRoundKey(round, state, RoundKey);
     }
+
+    // The last round is given below.
+    // The MixColumns function is not here in the last round.
+    Aes::SubBytes(state);
+    Aes::ShiftRows(state);
+    Aes::AddRoundKey(Nr, state, RoundKey);
+}
 
 #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
 
-    void Aes::InvCipher(state_t *state, const uint8_t *RoundKey) {
-        uint8_t round = 0;
+void Aes::InvCipher(state_t *state, const uint8_t *RoundKey) {
+    uint8_t round = 0;
 
-        // Add the First round key to the state before starting the rounds.
-        Aes::AddRoundKey(Nr, state, RoundKey);
+    // Add the First round key to the state before starting the rounds.
+    Aes::AddRoundKey(Nr, state, RoundKey);
 
-        // There will be Nr rounds.
-        // The first Nr-1 rounds are identical.
-        // These Nr-1 rounds are executed in the loop below.
-        for (round = (Nr - 1); round > 0; --round) {
-            Aes::InvShiftRows(state);
-            Aes::InvSubBytes(state);
-            Aes::AddRoundKey(round, state, RoundKey);
-            Aes::InvMixColumns(state);
-        }
-
-        // The last round is given below.
-        // The MixColumns function is not here in the last round.
+    // There will be Nr rounds.
+    // The first Nr-1 rounds are identical.
+    // These Nr-1 rounds are executed in the loop below.
+    for (round = (Nr - 1); round > 0; --round) {
         Aes::InvShiftRows(state);
         Aes::InvSubBytes(state);
-        Aes::AddRoundKey(0, state, RoundKey);
+        Aes::AddRoundKey(round, state, RoundKey);
+        Aes::InvMixColumns(state);
     }
+
+    // The last round is given below.
+    // The MixColumns function is not here in the last round.
+    Aes::InvShiftRows(state);
+    Aes::InvSubBytes(state);
+    Aes::AddRoundKey(0, state, RoundKey);
+}
 
 #endif // #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
 
