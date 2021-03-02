@@ -6,6 +6,7 @@
 
 - docker-compose：docker-compose实践与golang测试代码
 - encryption-lab：密码学部分加密算法实现
+- golang-helper：数据结构与算法的golang实现
 - mongo-go-driver：mongoDB官方golang驱动的实践
 
 博客&笔记
