@@ -5,6 +5,19 @@ import (
 	"sync"
 )
 
+func main() {
+	a := NewStack()
+	a.Print()
+	a.Push(1)
+	a.Push(2)
+	a.Print()
+	a.Pop()
+	a.Print()
+	a.Pop()
+	fmt.Println(a.Pop())
+}
+
+/***** Stack **********************************************************************/
 type Item interface {
 }
 
