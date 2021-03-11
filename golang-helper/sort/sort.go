@@ -1,14 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	a := []int{9, 1, 5, 8, 3, 7, 4, 6, 2}
 	//bubbleSort(a)
 	//selectSort(a)
-	insertSort(a)
-	//quickSort(a)
+	//insertSort(a)
+	quickSort(a)
 	fmt.Println(a)
+	//sort.Ints(a)
+	//fmt.Println(a)
 }
 
 /***** bubbleSort *****************************************************************************************************/
@@ -55,17 +59,28 @@ func insertSort(a []int) {
 
 /***** quickSort *****************************************************************************************************/
 func quickSort(a []int) {
-	quickSortHandler(0, len(a)-1, a)
+	quickSortHandler(a, 0, len(a)-1)
 }
 
-func quickSortHandler(left, right int, a []int) {
+func quickSortHandler(a []int, left, right int) {
 	if left >= right {
 		return
 	}
 
-	index := partition(left, right, a)
-	quickSortHandler(left, index-1, a)
-	quickSortHandler(index+1, right, a)
+	p, l, r := a[left], left, right
+	for l < r {
+		for l < r && a[r] >= p {
+			r--
+		}
+		a[l], a[r] = a[r], a[l]
+		for l < r && a[l] <= p {
+			l++
+		}
+		a[l], a[r] = a[r], a[l]
+	}
+
+	quickSortHandler(a, left, l-1)
+	quickSortHandler(a, l+1, right)
 }
 
 func partition(left, right int, a []int) int {
