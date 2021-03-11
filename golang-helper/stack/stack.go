@@ -36,6 +36,11 @@ func (s *Stack) Print() {
 	fmt.Println(s.items)
 }
 
+
+func (s *Stack) Empty() bool{
+	return len(s.items)==0
+}
+
 func (s *Stack) Push(item Item) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
