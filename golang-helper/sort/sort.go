@@ -5,95 +5,123 @@ import (
 )
 
 func main() {
-	a := []int{9, 1, 5, 8, 3, 7, 4, 6, 2}
-	//bubbleSort(a)
-	//selectSort(a)
-	//insertSort(a)
-	quickSort(a)
-	fmt.Println(a)
-	//sort.Ints(a)
-	//fmt.Println(a)
+	arr := []int{9, 1, 5, 8, 3, 7, 4, 6, 2}
+	//bubbleSort(arr)
+	//selectSort(arr)
+	//insertSort(arr)
+	//shellSort(arr)
+	arr = mergeSort(arr)
+	//quickSort(arr)
+	fmt.Println(arr)
 }
 
 /***** bubbleSort *****************************************************************************************************/
-func bubbleSort(a []int) {
-	hasReverse := true
-	for i := 0; i < len(a)-1 && hasReverse; i++ {
-		hasReverse = false
-		for j := len(a) - 1; j > i; j-- {
-			if a[j-1] > a[j] {
-				a[j-1], a[j] = a[j], a[j-1]
-				hasReverse = true
+func bubbleSort(arr []int) {
+	for i := 0; i < len(arr)-1; i++ {
+		for j := len(arr) - 1; j > i; j-- {
+			if arr[j-1] > arr[j] {
+				arr[j-1], arr[j] = arr[j], arr[j-1]
 			}
 		}
 	}
 }
 
 /***** selectSort *****************************************************************************************************/
-func selectSort(a []int) {
-	for i := 0; i < len(a); i++ {
+func selectSort(arr []int) {
+	for i := 0; i < len(arr); i++ {
 		min := i
-		for j := i + 1; j < len(a); j++ {
-			if a[min] > a[j] {
+		for j := i + 1; j < len(arr); j++ {
+			if arr[min] > arr[j] {
 				min = j
 			}
 		}
 		if min != i {
-			a[i], a[min] = a[min], a[i]
+			arr[i], arr[min] = arr[min], arr[i]
 		}
 	}
 }
 
 /***** insertSort *****************************************************************************************************/
-func insertSort(a []int) {
-	for i := 1; i < len(a); i++ {
-		index := i
-		current := a[i]
-		for j := i; j > 0 && a[j-1] > current; j-- {
-			a[j] = a[j-1]
-			index--
+func insertSort(arr []int) {
+	for i := 1; i < len(arr); i++ {
+		cur := arr[i]
+		j := i
+		for ; j > 0 && arr[j-1] > cur; j-- {
+			arr[j] = arr[j-1]
 		}
-		a[index] = current
+		arr[j] = cur
 	}
 }
 
-/***** quickSort *****************************************************************************************************/
-func quickSort(a []int) {
-	quickSortHandler(a, 0, len(a)-1)
+/***** shellSort *****************************************************************************************************/
+func shellSort(arr []int) {
+	gap := 1
+	for ; gap < len(arr)-1; gap = gap*2 + 1 {
+	}
+
+	for ; gap > 0; gap = gap / 2 {
+		for i := 0; i < len(arr); i++ {
+			cur := arr[i]
+			j := i
+			for ; j-gap >= 0 && arr[j-gap] > cur; j = j - gap {
+				arr[j] = arr[j-gap]
+			}
+			arr[j] = cur
+		}
+	}
 }
 
-func quickSortHandler(a []int, left, right int) {
+/***** mergeSort *****************************************************************************************************/
+func mergeSort(arr []int) []int {
+	if len(arr) < 2 {
+		return arr
+	}
+
+	middle := len(arr) / 2
+	return mergeHelper(mergeSort(arr[0:middle]), mergeSort(arr[middle:]))
+}
+
+func mergeHelper(a, b []int) []int {
+	var res []int
+
+	i, j := 0, 0
+	for i < len(a) && j < len(b) {
+		if a[i] < b[j] {
+			res = append(res, a[i])
+			i++
+		} else {
+			res = append(res, b[j])
+			j++
+		}
+	}
+
+	res = append(res, a[i:]...)
+	res = append(res, b[j:]...)
+	return res
+}
+
+/***** quickSort *****************************************************************************************************/
+func quickSort(arr []int) {
+	quickSortHandler(arr, 0, len(arr)-1)
+}
+
+func quickSortHandler(arr []int, left, right int) {
 	if left >= right {
 		return
 	}
 
-	p, l, r := a[left], left, right
+	p, l, r := arr[left], left, right
 	for l < r {
-		for l < r && a[r] >= p {
+		for l < r && arr[r] >= p {
 			r--
 		}
-		a[l], a[r] = a[r], a[l]
-		for l < r && a[l] <= p {
+		arr[l], arr[r] = arr[r], arr[l]
+		for l < r && arr[l] <= p {
 			l++
 		}
-		a[l], a[r] = a[r], a[l]
+		arr[l], arr[r] = arr[r], arr[l]
 	}
 
-	quickSortHandler(a, left, l-1)
-	quickSortHandler(a, l+1, right)
-}
-
-func partition(left, right int, a []int) int {
-	pivot := a[left]
-	for left < right {
-		for left < right && a[right] >= pivot {
-			right--
-		}
-		a[left], a[right] = a[right], a[left]
-		for left < right && a[left] <= pivot {
-			left++
-		}
-		a[left], a[right] = a[right], a[left]
-	}
-	return left
+	quickSortHandler(arr, left, l-1)
+	quickSortHandler(arr, l+1, right)
 }
