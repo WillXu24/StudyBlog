@@ -10,8 +10,9 @@ func main() {
 	//selectSort(arr)
 	//insertSort(arr)
 	//shellSort(arr)
-	arr = mergeSort(arr)
+	//arr = mergeSort(arr)
 	//quickSort(arr)
+	heapSort(arr)
 	fmt.Println(arr)
 }
 
@@ -124,4 +125,28 @@ func quickSortHandler(arr []int, left, right int) {
 
 	quickSortHandler(arr, left, l-1)
 	quickSortHandler(arr, l+1, right)
+}
+
+/***** quickSort *****************************************************************************************************/
+func heapSort(arr []int) {
+	for i := len(arr) / 2; i >= 0; i-- {
+		heapSink(arr, i)
+	}
+
+	for i := len(arr) - 1; i > 0; i-- {
+		arr[0], arr[i] = arr[i], arr[0]
+		heapSink(arr[:i], 0)
+	}
+}
+
+func heapSink(arr []int, root int) {
+	for i := root*2 + 1; i < len(arr); i = i*2 + 1 {
+		if i+1 < len(arr) && arr[i] < arr[i+1] {
+			i++
+		}
+		if arr[root] > arr[i] {
+			break
+		}
+		arr[root], arr[i], root = arr[i], arr[root], i
+	}
 }
